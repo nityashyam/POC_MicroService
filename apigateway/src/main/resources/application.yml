@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: employeeModule
+          uri: lb://FIRST-SERVICE
+          predicates:
+            - Path=/employee/**
+        - id: consumerModule
+          uri: lb://SECOND-SERVICE
+          predicates:
+            - Path=/consumer/**
+
+  application:
+    name: Gateway
+
+server :
+  port : 8090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka
